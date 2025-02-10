@@ -1,0 +1,55 @@
+
+import java.util.Arrays;
+import java.util.Collections;
+
+public class Chocolate {
+    public static void main(String[] args) {
+        // Scanner sc = new Scanner(System.in);
+        // System.out.println("Enter matirix size in m X n");
+        // int m = sc.nextInt();
+        // int n = sc.nextInt();
+
+        // Integer HC[] = new Integer[m-1];
+        // Integer VC[] = new Integer[n-1];
+        // System.out.println("Enter Horizontal Cuts");
+        // for (int i = 0; i < HC.length; i++) {
+        //     HC[i] = sc.nextInt();
+        // }
+        // System.out.println("Enter Vertical Cuts");
+        // for (int i = 0; i < VC.length; i++) {
+        //     VC[i] = sc.nextInt();
+        // }
+         Integer VC[] = {2,1,3,1,4};
+         Integer HC[] = {4,1,2}; 
+
+        Arrays.sort(HC,Collections.reverseOrder());
+        Arrays.sort(VC,Collections.reverseOrder());
+        int hp = 1 , vp = 1, hcp = 0, vcp = 0 ,cost = 0;
+
+    while (hcp < HC.length && vcp < VC.length) {
+       if (VC[vcp] > HC[hcp]) {
+        cost = cost+(hp*VC[vcp]);
+        vp++;
+        vcp++;
+       } 
+       else{
+        cost = cost+(vp*HC[hcp]);
+        hp++;
+        hcp++;
+       }
+    }
+    while (hcp < HC.length) {
+        cost = cost+(vp*HC[hcp]);
+        hp++;
+        hcp++;
+    }
+    while (vcp < VC.length) {
+        cost = cost+(hp*VC[vcp]);
+        vp++;
+        vcp++;
+    }
+    System.out.println(cost);
+    System.out.println(hp*vp);
+    }
+
+}
