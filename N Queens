@@ -1,0 +1,78 @@
+public class NQueens{
+    public static void main(String[] args) {
+        int n = 4;
+        char ch[][] = new char[n][n];
+        for (int i = 0; i < ch.length; i++) {
+            for (int j = 0; j < ch.length; j++) {
+                ch[i][j] = 'X';
+            }
+        }
+        if (nRow(ch, 0)) {
+         System.out.println("Solution exist");
+         System.out.println();
+         print(ch);   
+        }
+        else{
+            System.out.println("Solution doesn't exist");
+        }
+    }
+
+    public static void print(char ch[][]) {
+        System.out.println("-------------------------");
+        for (int i = 0; i < ch.length; i++) {
+            for (int j = 0; j < ch.length; j++) {
+                System.out.print(ch[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static boolean  nRow(char ch[][], int i) {
+        if (i == ch.length) {
+            System.out.println();
+            return true ;
+        }
+        for (int j = 0; j < ch.length; j++) {
+            if (isSafe(ch, i, j)) {
+                ch[i][j] = 'Q';
+                if(nRow(ch, i + 1)){
+                    return true;
+                }
+                ch[i][j] = 'X';
+            }
+        }
+          return false;
+    }
+
+    public static boolean isSafe(char ch[][], int i, int j) {
+        // Vertical
+        for (int j2 = i - 1; j2 >= 0; j2--) {
+            if (ch[j2][j] == 'Q') {
+                return false;
+            }
+        }
+        // Hori right
+        int r = i - 1;
+        int j2 = j + 1;
+        while (r >= 0 && j2 < ch.length) {
+            if (ch[r][j2] == 'Q') {
+                return false;
+            }
+            r--;
+            j2++;
+
+        }
+        // hori left
+        r = i - 1;
+        j2 = j - 1;
+        while (r >= 0 && j2 >= 0) {
+            if (ch[r][j2] == 'Q') {
+                return false;
+            }
+            r--;
+            j2--;
+
+        }
+        return true;
+    }
+}
